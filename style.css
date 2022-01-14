@@ -1,0 +1,72 @@
+body, html {
+  width: 400px;
+  background-color: #032e51;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* a beautiful button*/
+button {
+  padding: 8px;
+  background-color: #2064a2;
+  color: white;
+  border-radius: 5px;
+  border: none;
+}
+
+button:hover {
+  background-color: #1f5c9d;
+}
+
+.d-flex {
+  flex-wrap: wrap;
+  display: flex;
+}
+
+#fragment-content {
+  max-width: 100%;
+  width: 100%;
+}
+
+
+.zodiac-fragment {
+  width: 150px;
+  max-width: 150px;
+  flex: 1 1 auto;
+  background-color: #2F235DFF;
+  margin: 0 10px 10px;
+  padding: 8px;
+  border: 3px solid #6145A6FF;
+  border-radius: 12px;
+}
+
+.category-title h3 {
+  font-size: 18px;
+  text-transform: capitalize;
+  color: #fff;
+}
+
+.combine {
+  margin-top: 24px;
+  margin-left: 10px;
+}
+
+.warning {
+  color: #f15656;
+}
+
+p.fragment-name {
+  font-size: 18px;
+  color: #b1fbcf;
+}
+
+p.fragment-total::before {
+  content: "Qnt: ";
+  font-weight: bolder;
+  font-size: 15px;
+}
+
+p.fragment-total {
+  font-size: 18px;
+  font-weight: 700;
+}
