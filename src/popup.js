@@ -1,19 +1,19 @@
 import {renderFragment} from './fragments/fragments-render.js'
 
-
-const changeColor = document.getElementById("fragment-count-button");
+const searchCarsButton = document.getElementById("fragment-count-button");
+const runCarsButton = document.getElementById("run-cars-button");
 const content = document.getElementById('fragment-content')
 
-changeColor.addEventListener("click", async () => {
+searchCarsButton.addEventListener("click", async () => {
   let [tab] = await chrome.tabs.query({active: true, currentWindow: true});
 
   chrome.scripting.executeScript({
     target: {tabId: tab.id},
-    function: RunFragments,
+    function: FindFragments,
   });
 });
 
-function RunFragments() {
+function FindFragments() {
   const elements = Array.from(document.querySelectorAll(".text-white"))
   const fragments = elements.map((element) => element.innerHTML)
 
@@ -84,3 +84,12 @@ chrome.runtime.onMessage.addListener(
     sendResponse({farewell: "rendered"});
   }
 );
+
+runCarsButton.addEventListener('click', async () => {
+  let [tab] = await chrome.tabs.query({active: true, currentWindow: true});
+
+  chrome.scripting.executeScript({
+    target: {tabId: tab.id},
+    files: ['./src/RunCars/runCars.js']
+  });
+});
