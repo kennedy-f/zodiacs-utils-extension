@@ -60,15 +60,22 @@ function CarCanRun(car) {
 }
 
 
-function CheckResult() {
-  const checkResultButton = document.querySelector('.btn-yellow')
+async function CheckResult() {
 
-  if (checkResultButton.innerHTML === 'Check Result') {
-    checkResultButton.click()
-    clearInterval()
+
+  let isCheckResultRendered = false;
+  while (!isCheckResultRendered) {
+    const selected = document.querySelector('.selected')
+    const checkButton = selected.querySelector('.btn-yellow')
+    if (checkButton && checkButton.innerHTML === 'Check Result') {
+      isCheckResultRendered = true
+      checkButton.click()
+    }
+    await Sleep(500)
   }
 
-  return document.querySelector('.btn-yellow').innerHTML === 'Check Result'
+
+  return false
 }
 
 function GetResult() {
@@ -96,7 +103,7 @@ function Sleep(time) {
 
 function ClickCar(car) {
   const carElement = FindCarElement(car)
-  console.log(carElement)
+
   carElement.click()
   Sleep(100)
 }
@@ -110,21 +117,7 @@ async function StartRace(car) {
   startRaceButton.click()
 
   await Sleep(raceTime)
-  let isCheckResultBtnRendered = false
-  while (!isCheckResultBtnRendered) {
-    if (document.querySelector('.btn-yellow').innerHTML === 'Check Result') {
-      isCheckResultBtnRendered = true
-    }
-    await Sleep(500)
-  }
-
-
-  setInterval(() => {
-    if (document.querySelector('.btn-yellow').innerHTML === 'Check Result') {
-      clearInterval()
-    }
-  }, tryTimeAfterRace)
-
+  await CheckResult()
 
   return true
 }
@@ -144,7 +137,7 @@ async function main() {
 
       let isRunning = true;
       while (isRunning) {
-        isRunning = !CheckResult()
+        isRunning = await CheckResult()
         await Sleep(tryTimeAfterRace)
       }
       await Sleep(1000)
